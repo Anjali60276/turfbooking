@@ -1,0 +1,9 @@
+| Property        | Purpose                                                            | Example                           |
+| --------------- | ------------------------------------------------------------------ | --------------------------------- |
+| `icon`          | Displays the menu icon                                             | `Icons.dashboard`                 |
+| `label`         | Displays the menu text                                             | `"Dashboard"`                     |
+| `isActive`      | Controls the selected/highlighted appearance                       | `true` for the current page       |
+| `onTap`         | Runs code when the item is clicked                                 | `context.go('/bookings')`         |
+| `required`      | Forces essential values to be provided                             | `icon`, `label`                   |
+| `= false`       | Provides a default value when not supplied                         | Inactive by default               |
+| `VoidCallback?` | Stores an optional function with no parameters and no return value | Navigation, opening dialogs, etc. |
