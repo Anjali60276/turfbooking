@@ -23,55 +23,58 @@ class DashboardCards extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(24),
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(15),
-        border: Border.all(color: const Color(0xFFE2E8F0)),
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: const Color(0xFFE2E8F0), width: 1),
       ),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      
         children: [
-          Expanded(
+          // Left side - Text content
+          Flexible(
+            fit: FlexFit.tight,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
                   title,
                   style: const TextStyle(
-                    fontSize: 11,
+                    fontSize: 10,
                     fontWeight: FontWeight.w600,
                     color: Color(0xFF64748B),
-                    letterSpacing: .5,
-                  ),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  value,
-                  style: const TextStyle(
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xFF0F172A),
+                    letterSpacing: 0.5,
                   ),
                 ),
                 const SizedBox(height: 4),
+                Text(
+                  value,
+                  style: const TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.w700,
+                    color: Color(0xFF0F172A),
+                  ),
+                ),
+                const SizedBox(height: 2),
                 Text(
                   subtitle,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: const TextStyle(
-                    fontSize: 12,
+                    fontSize: 10,
                     color: Color(0xFF64748B),
                   ),
                 ),
               ],
             ),
           ),
-
-          const SizedBox(width: 12),
-
+          
+          // Right side - Icon
           Container(
-            padding: const EdgeInsets.all(10),
+            padding: const EdgeInsets.all(6),
             decoration: BoxDecoration(
               color: iconBg,
               shape: BoxShape.circle,
@@ -79,18 +82,12 @@ class DashboardCards extends StatelessWidget {
             child: Icon(
               icon,
               color: iconColor,
-              size: 22,
+              size: 16,
             ),
           ),
-          
-          
-          
-          
         ],
       ),
-      
     );
-    
   }
-  
 }
+
