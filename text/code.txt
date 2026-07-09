@@ -7,3 +7,435 @@
 | `required`      | Forces essential values to be provided                             | `icon`, `label`                   |
 | `= false`       | Provides a default value when not supplied                         | Inactive by default               |
 | `VoidCallback?` | Stores an optional function with no parameters and no return value | Navigation, opening dialogs, etc. |
+
+
+
+Here is the complete, single-file Flutter code for your entire dashboard. It is structured cleanly with separate, reusable widgets for each individual component—the Header, the Metric Cards, the Recent Bookings Table, and the Top Customers List—matching the exact design and spacing from your screenshot.
+
+You can paste this directly into a new file (e.g., `dashboard_page.dart`) and display it.
+
+```dart
+import 'package:flutter/material.dart';
+
+class DashboardPage extends StatelessWidget {
+  const DashboardPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: const Color(0xFFF1F5F9), // Light background hue from design
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(24.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // 1. TOP HEADER SECTION
+              const _DashboardHeader(),
+              const SizedBox(height: 24),
+
+              // 2. METRIC CARDS ROW
+              const _MetricsRow(),
+              const SizedBox(height: 24),
+
+              // 3. RECENT BOOKINGS CARD & TABLE
+              const _RecentBookingsCard(),
+              const SizedBox(height: 24),
+
+              // 4. TOP CUSTOMERS CARD & LIST
+              const _TopCustomersCard(),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+// ==========================================
+// 1. DASHBOARD HEADER COMPONENT
+// ==========================================
+class _DashboardHeader extends StatelessWidget {
+  const _DashboardHeader();
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              'Dashboard',
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: Color(0xFF0F172A),
+              ),
+            ),
+            const SizedBox(height: 4),
+            Text(
+              'Wednesday, 8 July 2026',
+              style: TextStyle(
+                fontSize: 13,
+                color: Colors.grey[600],
+              ),
+            ),
+          ],
+        ),
+        ElevatedButton.icon(
+          onPressed: () {},
+          icon: const Icon(Icons.add, size: 18, color: Colors.white),
+          label: const Text(
+            'New Booking',
+            style: TextStyle(fontWeight: FontWeight.w640, color: Colors.white),
+          ),
+          style: ElevatedButton.styleFrom(
+            backgroundColor: const Color(0xFF1D4ED8),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+            elevation: 0,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+// ==========================================
+// 2. METRICS ROW & INDIVIDUAL CARD COMPONENTS
+// ==========================================
+class _MetricsRow extends StatelessWidget {
+  const _MetricsRow();
+
+  @override
+  Widget build(BuildContext context) {
+    return const Row(
+      children: [
+        Expanded(
+          child: _MetricCard(
+            title: 'TOTAL BOOKINGS',
+            value: '6',
+            subtitle: '3 confirmed',
+            icon: Icons.assignment_outlined,
+            iconColor: Color(0xFF2563EB),
+            iconBg: Color(0xFFEFF6FF),
+          ),
+        ),
+        SizedBox(width: 16),
+        Expanded(
+          child: _MetricCard(
+            title: 'ACTIVE CUSTOMERS',
+            value: '5',
+            subtitle: 'registered members',
+            icon: Icons.people_outline,
+            iconColor: Color(0xFF4F46E5),
+            iconBg: Color(0xFFEEF2FF),
+          ),
+        ),
+        SizedBox(width: 16),
+        Expanded(
+          child: _MetricCard(
+            title: 'PENDING',
+            value: '2',
+            subtitle: 'awaiting confirmation',
+            icon: Icons.error_outline,
+            iconColor: Color(0xFFD97706),
+            iconBg: Color(0xFFFEF3C7),
+          ),
+        ),
+        SizedBox(width: 16),
+        Expanded(
+          child: _MetricCard(
+            title: 'REVENUE',
+            value: '₹5,400',
+            subtitle: 'from confirmed bookings',
+            icon: Icons.trending_up,
+            iconColor: Color(0xFF16A34A),
+            iconBg: Color(0xFFDCFCE7),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _MetricCard extends StatelessWidget {
+  final String title;
+  final String value;
+  final String subtitle;
+  final IconData icon;
+  final Color iconColor;
+  final Color iconBg;
+
+  const _MetricCard({
+    required this.title,
+    required this.value,
+    required this.subtitle,
+    required this.icon,
+    required this.iconColor,
+    required this.iconBg,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: const Color(0xFFE2E8F0)),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                style: const TextStyle(
+                  fontSize: 11,
+                  fontWeight: FontWeight.w600,
+                  color: Color(0xFF64748B),
+                  letterSpacing: 0.5,
+                ),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                value,
+                style: const TextStyle(
+                  fontSize: 28,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF0F172A),
+                ),
+              ),
+              const SizedBox(height: 4),
+              Text(
+                subtitle,
+                style: const TextStyle(fontSize: 12, color: Color(0xFF64748B)),
+              ),
+            ],
+          ),
+          Container(
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(color: iconBg, shape: BoxShape.circle),
+            child: Icon(icon, color: iconColor, size: 20),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// ==========================================
+// 3. RECENT BOOKINGS TABLE CARD COMPONENT
+// ==========================================
+class _RecentBookingsCard extends StatelessWidget {
+  const _RecentBookingsCard();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: const Color(0xFFE2E8F0)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          // Section Title Layer
+          Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  'Recent Bookings',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Color(0xFF0F172A)),
+                ),
+                TextButton(
+                  onPressed: () {},
+                  child: const Row(
+                    children: [
+                      Text('View all', style: TextStyle(color: Color(0xFF2563EB))),
+                      Icon(Icons.chevron_right, size: 16, color: Color(0xFF2563EB)),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          
+          // Data Table Layer
+          Table(
+            columnWidths: const {
+              0: FlexColumnWidth(1.2),
+              1: FlexColumnWidth(2),
+              2: FlexColumnWidth(2),
+              3: FlexColumnWidth(2.5),
+              4: FlexColumnWidth(1.5),
+              5: FlexColumnWidth(1.5),
+            },
+            children: [
+              // Table Header Row
+              _buildTableHeaderRow(),
+              // Data Rows
+              _buildTableRow('B001', 'Arjun Mehta', 'Football Turf', '2025-07-10 · 06:00 AM', '₹1,200', 'Confirmed', const Color(0xFF16A34A), const Color(0xFFDCFCE7)),
+              _buildTableRow('B002', 'Priya Sharma', 'Cricket Net', '2025-07-11 · 08:00 AM', '₹800', 'Pending', const Color(0xFFD97706), const Color(0xFFFEF3C7)),
+              _buildTableRow('B003', 'Rohit Verma', 'Football Turf', '2025-07-12 · 05:00 PM', '₹1,800', 'Confirmed', const Color(0xFF16A34A), const Color(0xFFDCFCE7)),
+              _buildTableRow('B004', 'Sneha Iyer', 'Badminton Court', '2025-07-13 · 07:00 AM', '₹600', 'Cancelled', const Color(0xFFDC2626), const Color(0xFFFEE2E2)),
+              _buildTableRow('B005', 'Karan Patel', 'Football Turf', '2025-07-14 · 06:00 PM', '₹2,400', 'Confirmed', const Color(0xFF16A34A), const Color(0xFFDCFCE7)),
+            ],
+          ),
+          const SizedBox(height: 12),
+        ],
+      ),
+    );
+  }
+
+  TableRow _buildTableHeaderRow() {
+    return TableRow(
+      decoration: const BoxDecoration(
+        color: Color(0xFFF8FAFC),
+        border: Border(
+          top: BorderSide(color: Color(0xFFE2E8F0)),
+          bottom: BorderSide(color: Color(0xFFE2E8F0)),
+        ),
+      ),
+      children: ['BOOKING ID', 'CUSTOMER', 'SERVICE', 'DATE & TIME', 'AMOUNT', 'STATUS'].map((title) {
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+          child: Text(
+            title,
+            style: const TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: Color(0xFF64748B)),
+          ),
+        );
+      }).toList(),
+    );
+  }
+
+  TableRow _buildTableRow(String id, String name, String service, String dateTime, String amount, String status, Color textCol, Color bgCol) {
+    return TableRow(
+      decoration: const BoxDecoration(border: Border(bottom: BorderSide(color: Color(0xFFF1F5F9)))),
+      children: [
+        Padding(padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18), child: Text(id, style: const TextStyle(color: Color(0xFF64748B), fontSize: 13))),
+        Padding(padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18), child: Text(name, style: const TextStyle(fontWeight: FontWeight.bold, color: Color(0xFF0F172A), fontSize: 13))),
+        Padding(padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18), child: Text(service, style: const TextStyle(color: Color(0xFF334155), fontSize: 13))),
+        Padding(padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18), child: Text(dateTime, style: const TextStyle(color: Color(0xFF64748B), fontSize: 13))),
+        Padding(padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18), child: Text(amount, style: const TextStyle(fontWeight: FontWeight.w640, color: Color(0xFF0F172A), fontSize: 13))),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+          child: Align(
+            alignment: Alignment.centerLeft,
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+              decoration: BoxDecoration(color: bgCol, borderRadius: BorderRadius.circular(100)),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(status == 'Confirmed' ? Icons.check_circle_outline : status == 'Pending' ? Icons.error_outline : Icons.cancel_outlined, size: 12, color: textCol),
+                  const SizedBox(width: 4),
+                  Text(status, style: TextStyle(color: textCol, fontSize: 11, fontWeight: FontWeight.bold)),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+// ==========================================
+// 4. TOP CUSTOMERS LIST COMPONENT
+// ==========================================
+class _TopCustomersCard extends StatelessWidget {
+  const _TopCustomersCard();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: const Color(0xFFE2E8F0)),
+      ),
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  'Top Customers',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Color(0xFF0F172A)),
+                ),
+                TextButton(
+                  onPressed: () {},
+                  child: const Row(
+                    children: [
+                      Text('View all', style: TextStyle(color: Color(0xFF2563EB))),
+                      Icon(Icons.chevron_right, size: 16, color: Color(0xFF2563EB)),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const Divider(height: 1, color: Color(0xFFE2E8F0)),
+          _buildCustomerItem('Rohit Verma', 'rohit.verma@email.com', '7', Colors.blue[500]!, 'R'),
+          const Divider(height: 1, color: Color(0xFFF1F5F9)),
+          _buildCustomerItem('Arjun Mehta', 'arjun.mehta@email.com', '5', Colors.indigo[500]!, 'A'),
+          const Divider(height: 1, color: Color(0xFFF1F5F9)),
+          _buildCustomerItem('Karan Patel', 'karan.patel@email.com', '4', Colors.lightBlue[500]!, 'K'),
+          const Divider(height: 1, color: Color(0xFFF1F5F9)),
+          _buildCustomerItem('Priya Sharma', 'priya.sharma@email.com', '3', Colors.deepPurple[400]!, 'P'),
+          const SizedBox(height: 8),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildCustomerItem(String name, String email, String count, Color avatarBg, String letter) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
+            children: [
+              CircleAvatar(
+                radius: 18,
+                backgroundColor: avatarBg.withAlpha(25),
+                child: Text(letter, style: TextStyle(color: avatarBg, fontWeight: FontWeight.bold, fontSize: 14)),
+              ),
+              const SizedBox(width: 14),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(name, style: const TextStyle(fontWeight: FontWeight.bold, color: Color(0xFF0F172A), fontSize: 14)),
+                  const SizedBox(height: 2),
+                  Text(email, style: const TextStyle(color: Color(0xFF64748B), fontSize: 12)),
+                ],
+              ),
+            ],
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Text(count, style: const TextStyle(fontWeight: FontWeight.bold, color: Color(0xFF0F172A), fontSize: 15)),
+              const Text('bookings', style: TextStyle(color: Color(0xFF64748B), fontSize: 11)),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+```

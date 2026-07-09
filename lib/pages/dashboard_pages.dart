@@ -2,153 +2,204 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tufbooking/components/dashboard_cards.dart';
 
-
-
 class DashboardPages extends StatelessWidget {
   const DashboardPages({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-            backgroundColor:  Color(0xFFF1F5F9),
-          appBar: AppBar(
-  backgroundColor: Colors.white,
-  elevation: 0,
-  toolbarHeight: 60,
-  
+      backgroundColor: const Color(0xFFF1F5F9),
 
-  title: Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    children: [
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
+        toolbarHeight: 70,
 
-      // Left Side
-      Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-
-          Text(
-            "Dashboard",
-            style: GoogleFonts.inter(
-              fontSize: 20,
-              fontWeight: FontWeight.w800,
-              color: const Color(0xFF0F172A),
-             
-            ),
-          ),
-
-          const SizedBox(height: 4),
-
-          Text(
-            "Wednesday, 8 July 2026",
-            style: TextStyle(
-              fontSize: 10,
-              color: Colors.grey.shade600,
-            ),
-          ),
-        ],
-      ),
-
-
-     const SizedBox(width: 20),
-      // Right Side
-      ElevatedButton.icon(
-        onPressed: () {},
-
-        icon: const Icon(
-          Icons.add,
-          size: 16,
-          color: Colors.white,
-        ),
-
-        label: const Text(
-          "New Booking",
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.w400,
-          ),
-        ),
-
-        style: ElevatedButton.styleFrom(
-          backgroundColor: const Color(0xFF1D4ED8),
-           minimumSize: const Size(120, 40),
-          padding: const EdgeInsets.symmetric(
-            horizontal: 20,
-            vertical: 16,
-            
-          ),
-          elevation: 0,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(5),
-          ),
-        ),
-      ),
-    ],
-  ),
-),
-          
-          body: SafeArea(
-            child:SingleChildScrollView(
-              padding: const EdgeInsets.all(24),
-              child: Row(
+        title: Row(
+          children: [
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                 Expanded(
-                  child: DashboardCards(
-                    title: 'TOTAL BOOKINGS',
-                     value: '6', 
-                     subtitle: '3 confirmed',
-                      icon:Icons.assignment_outlined, 
-                      iconColor:Color(0xFF2563EB),
-                       iconBg: Color(0xFFEFF6FF),
-                        ),
+                children: [
+                  Text(
+                    "Dashboard",
+                    style: GoogleFonts.inter(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w800,
+                      color: const Color(0xFF0F172A),
+                    ),
                   ),
-                  SizedBox(width: 16),
-                  
-                   Expanded(
-                  child: DashboardCards(
-                   title: 'ACTIVE CUSTOMERS',
-            value: '5',
-            subtitle: 'registered members',
-            icon: Icons.people_outline,
-            iconColor: Color(0xFF4F46E5),
-            iconBg: Color(0xFFEEF2FF),
-                        ),
+
+                  const SizedBox(height: 4),
+
+                  Text(
+                    "Wednesday, 8 July 2026",
+                    style: TextStyle(
+                      fontSize: 11,
+                      color: Colors.grey.shade600,
+                    ),
                   ),
-                  
-                      SizedBox(width: 16),
-                      
-                            Expanded(
-                  child: DashboardCards(
-                   title: 'PENDING',
-            value: '2',
-            subtitle: 'awaiting confirmation',
-            icon: Icons.error_outline,
-            iconColor: Color(0xFFD97706),
-            iconBg: Color(0xFFFEF3C7),
-                        ),
-                  ),
-                  
-                  SizedBox(width: 16),
-                  
-                  Expanded(
-                  child: DashboardCards(
-                   title: 'REVENUE',
-            value: '₹5,400',
-            subtitle: 'from confirmed bookings',
-            icon: Icons.trending_up,
-            iconColor: Color(0xFF16A34A),
-            iconBg: Color(0xFFDCFCE7),
-                        ),
-                  ),
-                  
-                  
-                  
                 ],
-              ) 
-            ) ),
+              ),
+            ),
+
+            ElevatedButton.icon(
+              onPressed: () {},
+
+              icon: const Icon(
+                Icons.add,
+                color: Colors.white,
+                size: 18,
+              ),
+
+              label: const Text(
+                "New Booking",
+                style: TextStyle(color: Colors.white),
+              ),
+
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xFF1D4ED8),
+                minimumSize: const Size(140, 42),
+                elevation: 0,
+              ),
+            ),
+          ],
+        ),
+      ),
+
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(24),
+
+        child: Column(
+          children: [
+            Wrap(
+              spacing: 16,
+              runSpacing: 16,
+
+              children: const [
+
+            SizedBox(
+              width: 280,
+              child: DashboardCards(
+                title: "TOTAL BOOKINGS",
+                value: "6",
+                subtitle: "3 confirmed",
+                icon: Icons.assignment_outlined,
+                iconColor: Color(0xFF2563EB),
+                iconBg: Color(0xFFEFF6FF),
+              ),
+            ),
+
+            SizedBox(
+              width: 280,
+              child: DashboardCards(
+                title: "ACTIVE CUSTOMERS",
+                value: "5",
+                subtitle: "Registered Members",
+                icon: Icons.people_outline,
+                iconColor: Color(0xFF4F46E5),
+                iconBg: Color(0xFFEEF2FF),
+              ),
+            ),
+
+            SizedBox(
+              width: 280,
+              child: DashboardCards(
+                title: "PENDING",
+                value: "2",
+                subtitle: "Awaiting Confirmation",
+                icon: Icons.error_outline,
+                iconColor: Color(0xFFD97706),
+                iconBg: Color(0xFFFEF3C7),
+              ),
+            ),
+
+            SizedBox(
+              width: 280,
+              child: DashboardCards(
+                title: "REVENUE",
+                value: "₹5,400",
+                subtitle: "From Confirmed Bookings",
+                icon: Icons.trending_up,
+                iconColor: Color(0xFF16A34A),
+                iconBg: Color(0xFFDCFCE7),
+              ),
+            ),
+              ],
+            ),
+
+            const SizedBox(height: 24),
+            
+             Container(
+                 decoration: BoxDecoration(
+                     color: Colors.white,
+                     borderRadius: BorderRadius.circular(5),
+  border: Border.all(color: const Color(0xFFE2E8F0)),
+                 ),
+                 
+                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    
+                    Padding(
+                      padding: const EdgeInsets.all(20.0),
+                        child:Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                           Text("Recent Booking",
+                             style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 15,
+                              fontWeight: FontWeight.w700,
+                             ),
+                             ),
+                             
+                             SizedBox(width: 16), //here eroor getting then remove it
+                             
+                          TextButton(onPressed: () {
+                              
+                             }, child:  Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                               children: [
+                                 Text(" View all",
+                                 style: TextStyle(color: Colors.blue.shade800,
+                                 fontSize: 10,
+                                  fontWeight: FontWeight.w400,
+                                  ),
+                                  ),
+                                  
+                                      SizedBox(width: 4),
+                                      
+                                       Icon(
+        Icons.chevron_right,
+        size: 16,
+        color: Colors.blue.shade800,
+      ),
+                                      
+                               ],
+                             ),
+                             ),
+                             
+                         
+                          
+                        ],)
+                      
+                      
+                      ), //next right after padding
+                      
+                    
+                    
+                 ],
+                 ),
+                 
+                 
+                
+              ),
           
-    
+          ],
+        ),
+      ),
     );
   }
 }
