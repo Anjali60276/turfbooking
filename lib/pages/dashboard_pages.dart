@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:tufbooking/components/customer_tile.dart';
 import 'package:tufbooking/components/dashboard_cards.dart';
 import 'package:tufbooking/data/booking_data.dart';
+import 'package:tufbooking/components/status_badge.dart';
+import 'package:tufbooking/data/customer_data.dart';
 
 class DashboardPages extends StatelessWidget {
   const DashboardPages({super.key});
@@ -32,21 +35,14 @@ class DashboardPages extends StatelessWidget {
                   const SizedBox(height: 4),
                   Text(
                     "Wednesday, 8 July 2026",
-                    style: TextStyle(
-                      fontSize: 11,
-                      color: Colors.grey.shade600,
-                    ),
+                    style: TextStyle(fontSize: 11, color: Colors.grey.shade600),
                   ),
                 ],
               ),
             ),
             ElevatedButton.icon(
               onPressed: () {},
-              icon: const Icon(
-                Icons.add,
-                color: Colors.white,
-                size: 18,
-              ),
+              icon: const Icon(Icons.add, color: Colors.white, size: 18),
               label: const Text(
                 "New Booking",
                 style: TextStyle(color: Colors.white),
@@ -64,65 +60,61 @@ class DashboardPages extends StatelessWidget {
         padding: const EdgeInsets.all(24),
         child: Column(
           children: [
-            // Dashboard Cards Row - Fixed with Wrap for responsiveness
-        Row(
-  children: const [
-    Expanded(
-      child: DashboardCards(
-        title: "TOTAL BOOKINGS",
-        value: "6",
-        subtitle: "3 confirmed",
-        icon: Icons.assignment_outlined,
-        iconColor: Color(0xFF2563EB),
-        iconBg: Color(0xFFEFF6FF),
-      ),
-    ),
-    SizedBox(width: 20),
-
-    Expanded(
-      child: DashboardCards(
-        title: "ACTIVE CUSTOMERS",
-        value: "5",
-        subtitle: "Registered Members",
-        icon: Icons.people_outline,
-        iconColor: Color(0xFF4F46E5),
-        iconBg: Color(0xFFEEF2FF),
-      ),
-    ),
-    SizedBox(width: 20),
-
-    Expanded(
-      child: DashboardCards(
-        title: "PENDING",
-        value: "2",
-        subtitle: "Awaiting Confirmation",
-        icon: Icons.error_outline,
-        iconColor: Color(0xFFD97706),
-        iconBg: Color(0xFFFEF3C7),
-      ),
-    ),
-    SizedBox(width: 20),
-
-    Expanded(
-      child: DashboardCards(
-        title: "REVENUE",
-        value: "₹5,400",
-        subtitle: "From Confirmed Bookings",
-        icon: Icons.trending_up,
-        iconColor: Color(0xFF16A34A),
-        iconBg: Color(0xFFDCFCE7),
-      ),
-    ),
-  ],
-),
+            // Dashboard Cards Row
+            Row(
+              children: const [
+                Expanded(
+                  child: DashboardCards(
+                    title: "TOTAL BOOKINGS",
+                    value: "6",
+                    subtitle: "3 confirmed",
+                    icon: Icons.assignment_outlined,
+                    iconColor: Color(0xFF2563EB),
+                    iconBg: Color(0xFFEFF6FF),
+                  ),
+                ),
+                SizedBox(width: 20),
+                Expanded(
+                  child: DashboardCards(
+                    title: "ACTIVE CUSTOMERS",
+                    value: "5",
+                    subtitle: "Registered Members",
+                    icon: Icons.people_outline,
+                    iconColor: Color(0xFF4F46E5),
+                    iconBg: Color(0xFFEEF2FF),
+                  ),
+                ),
+                SizedBox(width: 20),
+                Expanded(
+                  child: DashboardCards(
+                    title: "PENDING",
+                    value: "2",
+                    subtitle: "Awaiting Confirmation",
+                    icon: Icons.error_outline,
+                    iconColor: Color(0xFFD97706),
+                    iconBg: Color(0xFFFEF3C7),
+                  ),
+                ),
+                SizedBox(width: 20),
+                Expanded(
+                  child: DashboardCards(
+                    title: "REVENUE",
+                    value: "₹5,400",
+                    subtitle: "From Confirmed Bookings",
+                    icon: Icons.trending_up,
+                    iconColor: Color(0xFF16A34A),
+                    iconBg: Color(0xFFDCFCE7),
+                  ),
+                ),
+              ],
+            ),
             const SizedBox(height: 24),
             Container(
-             constraints: const BoxConstraints(
-    minHeight: 400,
-    maxHeight: 400, // change container height here
-    
-    minWidth: double.infinity,
-  ),
+              width: double.infinity,
+              constraints: const BoxConstraints(
+               
+                minWidth: double.infinity,
+              ),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(5),
@@ -136,7 +128,7 @@ class DashboardPages extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
+                        const Text(
                           "Recent Bookings",
                           style: TextStyle(
                             color: Colors.black,
@@ -169,99 +161,275 @@ class DashboardPages extends StatelessWidget {
                     ),
                   ),
                   const Divider(height: 1),
-                   
-                    SingleChildScrollView(
-    scrollDirection: Axis.horizontal,
-    child: DataTable(
-      headingRowColor: WidgetStateProperty.all(
-        Colors.grey.shade100,
+                  
+                    
+                   LayoutBuilder(
+  builder: (context, constraints) {
+
+    final w = constraints.maxWidth;
+
+    return DataTable(
+      columnSpacing: 10,
+      horizontalMargin: 20,
+      headingRowHeight: 52,
+dataRowMinHeight: 62,
+dataRowMaxHeight: 62,
+ headingRowColor: WidgetStateProperty.all(
+                           Colors.grey.shade100,
+                         ),
+      columns: [
+
+        DataColumn(
+          label: SizedBox(
+            width: w * .15,
+            child: const Text("Booking ID",
+            style: TextStyle(
+        fontSize: 13,
+        fontWeight: FontWeight.w700,
+        color: Color(0xFF64748B),
       ),
-    columns: const [
-  DataColumn(label: SizedBox(width: 180, child: Text("Booking ID"))), //sized box needed for spacing to cover the table to fill container
-  DataColumn(label: SizedBox(width: 180, child: Text("Customer"))),
-  DataColumn(label: SizedBox(width: 180, child: Text("Service"))),
-  DataColumn(label: SizedBox(width: 180, child: Text("Date"))),
-  DataColumn(label: SizedBox(width: 180, child: Text("Amount"))),
-  DataColumn(label: SizedBox(width: 180, child: Text("Status"))),
-],
-      rows: const [
-        DataRow(
-          cells: [
-            DataCell(SizedBox(
-              width: 180,child: Text("B001"),
-              ),
-              ),
-            DataCell(Text("Arjun Mehta")),
-            DataCell(Text("Football Turf")),
-            DataCell(Text("10 Jul 2026.06:00 AM")),
-            DataCell(Text("₹1,200")),
-            DataCell(Text("Confirmed")),
-          ],
+            ),
+          ),
         ),
-        DataRow(
-          cells: [
-            DataCell(Text("B002")),
-            DataCell(Text("Priya Sharma")),
-            DataCell(Text("Cricket Net")),
-            DataCell(Text("11 Jul 2025.08:00 AM")),
-            DataCell(Text("₹800")),
-            DataCell(Text("Pending")),
-          ],
+
+        DataColumn(
+          label: SizedBox(
+            width: w * .18,
+            child: const Text("Customer",
+            style: TextStyle(
+        fontSize: 13,
+        fontWeight: FontWeight.w700,
+        color: Color(0xFF64748B),
+      ),),
+          ),
         ),
-        
-         DataRow(
-          cells: [
-            DataCell(SizedBox(
-              width: 90,child: Text("B003"),
-              ),
-              ),
-            DataCell(Text("Rohit Verma")),
-            DataCell(Text("Football Turf")),
-            DataCell(Text("12 Jul 2025.05:00 PM")),
-            DataCell(Text("₹1,800")),
-            DataCell(Text("Confirmed")),
-          ],
+
+        DataColumn(
+          label: SizedBox(
+            width: w * .18,
+            child: const Text("Service",
+            style: TextStyle(
+        fontSize: 13,
+        fontWeight: FontWeight.w700,
+        color: Color(0xFF64748B),
+      ),),
+          ),
         ),
-        
-         DataRow(
-          cells: [
-            DataCell(SizedBox(
-              width: 180,child: Text("B004"),
-              ),
-              ),
-            DataCell(Text("Sneha Iyer")),
-            DataCell(Text("Badminton Court")),
-            DataCell(Text("13 Jul 2025.07:00 AM")),
-            DataCell(Text("₹600")),
-            DataCell(Text("Cancelled")),
-          ],
+
+        DataColumn(
+          label: SizedBox(
+            width: w * .20,
+            child: const Text("Date & Time",
+            style: TextStyle(
+        fontSize: 13,
+        fontWeight: FontWeight.w700,
+        color: Color(0xFF64748B),
+      ),),
+          ),
         ),
-         DataRow(
-          cells: [
-            DataCell(SizedBox(
-              width: 180,child: Text("B005"),
-              ),
-              ),
-            DataCell(Text("Karan Patel")),
-            DataCell(Text("Football Turf")),
-            DataCell(Text("14 Jul 2025.06:00 PM")),
-            DataCell(Text("₹2,400")),
-            DataCell(Text("Confirmed")),
-          ],
+
+        DataColumn(
+          label: SizedBox(
+            width: w * .10,
+            child: const Text("Amount",
+            style: TextStyle(
+        fontSize: 13,
+        fontWeight: FontWeight.w700,
+        color: Color(0xFF64748B),
+      ),),
+          ),
         ),
-        
-        
+
+        DataColumn(
+          label: SizedBox(
+            width: w * .15,
+            child: const Text("Status",
+            style: TextStyle(
+        fontSize: 13,
+        fontWeight: FontWeight.w700,
+        color: Color(0xFF64748B),
+      ),),
+          ),
+        ),
       ],
+
+     rows: bookings.map((booking) {
+  return DataRow(
+    cells: [
+
+      DataCell(
+        SizedBox(
+          width: w * .10,
+          child: Text(
+            booking.id,
+            style: const TextStyle(
+              fontSize: 10,
+              color: Color(0xFF64748B),
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ),
+      ),
+
+      DataCell(
+        SizedBox(
+          width: w * .18,
+          child: Text(
+            booking.customer,
+            overflow: TextOverflow.ellipsis,
+            style: const TextStyle(
+              fontSize: 14,
+              color: Colors.black,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ),
+      ),
+
+      DataCell(
+        SizedBox(
+          width: w * .15,
+          child: Text(
+            booking.service,
+            overflow: TextOverflow.ellipsis,
+            style: const TextStyle(
+              fontSize: 12,
+              color: Color(0xFF64748B),
+            ),
+          ),
+        ),
+      ),
+
+      DataCell(
+        SizedBox(
+          width: w * .20,
+          child: Text(
+            booking.dateTime,
+            style: const TextStyle(
+              fontSize: 12,
+              color: Color(0xFF64748B),
+            ),
+          ),
+        ),
+      ),
+
+      DataCell(
+        SizedBox(
+          width: w * .11,
+          child: Text(
+            booking.amount,
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+      ),
+
+      DataCell(
+        SizedBox(
+          width: w * .12,
+          child: Align(
+            alignment: Alignment.centerLeft,
+            child: StatusBadge(
+              status: booking.status,
+            ),
+          ),
+        ),
+      ),
+    ],
+  );
+}).toList(),
+    );
+  },
+)
+                
+                ],
+              ),
+            ),
+            
+            const SizedBox(height: 24),
+
+Container(
+  width: double.infinity,
+  decoration: BoxDecoration(
+    color: Colors.white,
+    borderRadius: BorderRadius.circular(5),
+    border: Border.all(
+      color: const Color(0xFFE2E8F0),
     ),
-                   
-                   ),  
+  ),
+  child: Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+
+      // Header
+      Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 20,
+          vertical: 16,
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const Text(
+              "Top Customers",
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+
+            TextButton(
+              onPressed: () {},
+              child: Row(
+                children: [
+                  Text(
+                    "View all",
+                    style: TextStyle(
+                      color: Colors.blue.shade700,
+                      fontSize: 12,
+                    ),
+                  ),
+                  const SizedBox(width: 4),
+                  Icon(
+                    Icons.chevron_right,
+                    size: 18,
+                    color: Colors.blue.shade700,
+                  ),
                 ],
               ),
             ),
           ],
         ),
       ),
+
+      const Divider(height: 1),
+
+      ListView.separated(
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        itemCount: customers.length,
+
+        itemBuilder: (context, index) {
+          return CustomerTile(
+            customer: customers[index],
+          );
+        },
+
+        separatorBuilder: (context, index) {
+          return const Divider(
+            height: 1,
+            color: Color(0xFFE2E8F0),
+          );
+        },
+      ),
+    ],
+  ),
+),
+          
+          ],
+        ),
+      ),
     );
   }
 }
-
