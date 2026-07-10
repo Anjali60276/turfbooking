@@ -1,6 +1,6 @@
 import '../models/booking_model.dart';
 
-final List<BookingModel> bookings = [
+final List<BookingModel> dummy = [
   BookingModel(
     id: "B001",
     customer: "Arjun Mehta",
@@ -46,30 +46,30 @@ final List<BookingModel> bookings = [
     status: "Confirmed",
   ),
 
-  // BookingModel(
-  //   id: "B006",
-  //   customer: "Aisha Khan",
-  //   service: "Tennis Court",
-  //   dateTime: "15 Jul 2026 • 09:00 AM",
-  //   amount: "₹900",
-  //   status: "Pending",
-  // ),
+  BookingModel(
+    id: "B006",
+    customer: "Aisha Khan",
+    service: "Tennis Court",
+    dateTime: "15 Jul 2026 • 09:00 AM",
+    amount: "₹900",
+    status: "Pending",
+  ),
 
-  // BookingModel(
-  //   id: "B007",
-  //   customer: "Vikram Singh",
-  //   service: "Basketball Court",
-  //   dateTime: "15 Jul 2026 • 07:00 PM",
-  //   amount: "₹1,500",
-  //   status: "Confirmed",
-  // ),
+  BookingModel(
+    id: "B007",
+    customer: "Vikram Singh",
+    service: "Basketball Court",
+    dateTime: "15 Jul 2026 • 07:00 PM",
+    amount: "₹1,500",
+    status: "Confirmed",
+  ),
 
-  // BookingModel(
-  //   id: "B008",
-  //   customer: "Neha Reddy",
-  //   service: "Swimming Pool",
-  //   dateTime: "16 Jul 2026 • 10:00 AM",
-  //   amount: "₹700",
-  //   status: "Confirmed",
-  // ),
+  BookingModel(
+    id: "B008",
+    customer: "Neha Reddy",
+    service: "Swimming Pool",
+    dateTime: "16 Jul 2026 • 10:00 AM",
+    amount: "₹700",
+    status: "Confirmed",
+  ),
 ];
