@@ -42,14 +42,14 @@ class DashboardPages extends StatelessWidget {
             ),
             ElevatedButton.icon(
               onPressed: () {},
-              icon: const Icon(Icons.add, color: Colors.white, size: 18),
+              icon: const Icon(Icons.add, color: Colors.white, size: 12),
               label: const Text(
                 "New Booking",
                 style: TextStyle(color: Colors.white),
               ),
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFF1D4ED8),
-                minimumSize: const Size(140, 42),
+                minimumSize: const Size(100, 42),
                 elevation: 0,
               ),
             ),
