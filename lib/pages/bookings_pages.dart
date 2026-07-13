@@ -52,7 +52,8 @@ void filterBookings(int index) {
   });
 }
 
-  @override
+
+ 
   int get confirmedCount =>
     allBookings.where((e) => e.status == "Confirmed").length;
 
@@ -61,6 +62,7 @@ int get pendingCount =>
 
 int get cancelledCount =>
     allBookings.where((e) => e.status == "Cancelled").length;
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
