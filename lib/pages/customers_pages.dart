@@ -118,8 +118,8 @@ class  CustomersPages extends StatelessWidget {
     gridDelegate:
         const SliverGridDelegateWithFixedCrossAxisCount(
       crossAxisCount: 3,
-      crossAxisSpacing: 20,
-      mainAxisSpacing: 20,
+       crossAxisSpacing: 30,
+     mainAxisSpacing: 20,
       childAspectRatio: 1.35,
     ),
     itemBuilder: (context, index) {
