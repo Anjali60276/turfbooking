@@ -64,7 +64,7 @@ class  CustomersPages extends StatelessWidget {
               ),
               child: const TextField(
                 decoration: InputDecoration(
-                  hintText: "Search bookings...",
+                  hintText: "Search Customers...",
                   hintStyle: TextStyle(fontSize: 14, color: Color(0xFF94A3B8)),
                   prefixIcon: Icon(
                     Icons.search,
@@ -89,7 +89,7 @@ class  CustomersPages extends StatelessWidget {
                 onPressed: () {},
                 icon: const Icon(Icons.add, color: Colors.white, size: 10),
                 label: Text(
-                  "Add Booking",
+                  "Add Customers",
                   style: GoogleFonts.inter(
                     fontWeight: FontWeight.w600,
                     fontSize: 14,
