@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:tufbooking/data/book_data.dart';
+import 'package:tufbooking/components/Customer_cards.dart';
+import 'package:tufbooking/models/book_model.dart';
 
 class  CustomersPages extends StatelessWidget {
   const CustomersPages({super.key});
@@ -39,7 +42,7 @@ class  CustomersPages extends StatelessWidget {
 
                   const SizedBox(height: 2, width: 2),
                   Text(
-                    "",
+                    "5 registered customer",
                     style: GoogleFonts.inter(
                       fontSize: 12,
                       color: const Color(0xFF64748B),
@@ -106,6 +109,26 @@ class  CustomersPages extends StatelessWidget {
           ],
         ),
       ),
+      
+      
+      body: Padding(
+  padding: const EdgeInsets.all(20),
+  child: GridView.builder(
+    itemCount: customer.length,
+    gridDelegate:
+        const SliverGridDelegateWithFixedCrossAxisCount(
+      crossAxisCount: 3,
+      crossAxisSpacing: 20,
+      mainAxisSpacing: 20,
+      childAspectRatio: 1.35,
+    ),
+    itemBuilder: (context, index) {
+      return CustomerCard(
+        customer: customer[index],
+      );
+    },
+  ),
+),
     );
   }
 }

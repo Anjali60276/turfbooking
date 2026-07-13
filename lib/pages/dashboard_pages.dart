@@ -327,7 +327,7 @@ dataRowMaxHeight: 62,
 
       DataCell(
         SizedBox(
-          width: w * .12,
+          width: w * .18,
           child: Align(
             alignment: Alignment.centerLeft,
             child: StatusBadge(
