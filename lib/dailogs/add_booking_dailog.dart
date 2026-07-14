@@ -401,7 +401,7 @@ class _AddBookingDialogState extends State<AddBookingDialog> {
                           ),
                         ),
                 
-                        const SizedBox(height: 6),
+                        const SizedBox(height: 16),
                 
                         // Buttons
                         Row(
