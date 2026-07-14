@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tufbooking/data/book_data.dart';
 import 'package:tufbooking/components/Customer_cards.dart';
-import 'package:tufbooking/models/book_model.dart';
 
 class  CustomersPages extends StatelessWidget {
   const CustomersPages({super.key});
@@ -52,7 +51,7 @@ class  CustomersPages extends StatelessWidget {
               ),
             ),
 
-            const SizedBox(width: 25),
+            const SizedBox(width: 12),
             // Search Box
             Container(
               width: 220,
@@ -115,13 +114,12 @@ class  CustomersPages extends StatelessWidget {
   padding: const EdgeInsets.all(20),
   child: GridView.builder(
     itemCount: customer.length,
-    gridDelegate:
-        const SliverGridDelegateWithFixedCrossAxisCount(
-      crossAxisCount: 3,
-       crossAxisSpacing: 30,
-     mainAxisSpacing: 20,
-      childAspectRatio: 1.35,
-    ),
+  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+  crossAxisCount: 3,
+  crossAxisSpacing: 30,
+  mainAxisSpacing: 20,
+  childAspectRatio: 1.20,
+),
     itemBuilder: (context, index) {
       return CustomerCard(
         customer: customer[index],

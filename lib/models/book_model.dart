@@ -16,4 +16,4 @@ class Customer {
     required this.joinedDate,
     required this.bookings,
   });
-}
+} 

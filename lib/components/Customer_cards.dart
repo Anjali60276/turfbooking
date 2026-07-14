@@ -12,9 +12,7 @@ class CustomerCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      scrollDirection: Axis.vertical,
-      child: Card(
+    return  Card(
          
             elevation: 0,
             shadowColor: Colors.blueGrey,
@@ -23,7 +21,7 @@ class CustomerCard extends StatelessWidget {
               borderRadius: BorderRadius.circular(16),
                 side: const BorderSide(color: Color(0xFFE2E8F0)),
             ),
-             child: Padding(padding: const EdgeInsets.all(18),
+             child: Padding(padding: const EdgeInsets.all(14),
                child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start, //step one root is column and row must be come
                 children: [
@@ -33,7 +31,7 @@ class CustomerCard extends StatelessWidget {
                        
                        //First need to create an circle avatar
                         CircleAvatar(
-                           radius: 24,
+                           radius: 20,
                            backgroundColor: const Color(0xFFDBEAFE),
                            child: Text(customer.name[0],
                              style: GoogleFonts.inter(
@@ -79,7 +77,7 @@ class CustomerCard extends StatelessWidget {
                          Align(
                                 alignment: Alignment.centerLeft,
                                  child: Container(
-                                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                                     decoration: BoxDecoration(
                                       color: const Color(0xFFEEF2FF),
                                       borderRadius: BorderRadius.circular(20),    
@@ -90,26 +88,26 @@ class CustomerCard extends StatelessWidget {
                                        style: GoogleFonts.inter(
                                         color: Colors.indigo,
                                          fontWeight: FontWeight.w500,
-                                         fontSize: 16,
+                                         fontSize: 14,
                                        ),       
                                    ),    
                                  ),
                                ), 
                   ],
                   ),
-                    const SizedBox(height: 10),
+                    const SizedBox(height: 3),
                             
                            infoRow(Icons.email_outlined, customer.email),
                            
-                           const SizedBox(height: 10),
+                           const SizedBox(height: 6),
                            
                            infoRow(Icons.local_phone_outlined, customer.phone),
                            
-                            const SizedBox(height: 10),
+                            const SizedBox(height: 6),
                             
                             infoRow(Icons.location_on_outlined, customer.address),
                             
-                            const SizedBox(height: 10),
+                            const SizedBox(height: 6),
                             
                               infoRow(Icons.calendar_today_outlined, customer.joinedDate),
                            
@@ -120,15 +118,15 @@ class CustomerCard extends StatelessWidget {
                             width: double.infinity,
                             child: OutlinedButton.icon(onPressed: () {
                               
-                            }, icon:  const Icon(Icons.calendar_month_outlined),
+                            }, icon:  const Icon(Icons.calendar_month_outlined, size: 16),
                             label: const Text("View Booking"), ),
                            ),
                ],
                
                ),
              ),
-        ),
-    );
+        );
+  
   
   }
 }
